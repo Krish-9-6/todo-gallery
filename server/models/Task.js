@@ -9,9 +9,9 @@ const TaskSchema = new mongoose.Schema({
     },
 
     title: {type: String, required: true},
-    description: String,
+    description:{ type: String },
     imageUrl: {type: String, required: true},
-    isCompleted: {type: Boolean, required: false},
+   // isCompleted: {type: Boolean, required: false},
     createdAt: {type: Date, default: Date.now}
 });
 

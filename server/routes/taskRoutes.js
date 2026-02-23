@@ -9,6 +9,7 @@ router.post('/', auth, upload.single('image'), async (req, res) =>{
         const {title, description} = req.body;
 
         const newTask = new Task({
+            user: req.user.id,
             title,
             description,
             imageUrl: req.file.path,
@@ -18,6 +19,7 @@ router.post('/', auth, upload.single('image'), async (req, res) =>{
         res.status(201).json(savedTask);
     }
     catch(err){
+        console.error("Save Error:", err.message);
         res.status(500).json({message: err.message});
     }
 
@@ -26,10 +28,11 @@ router.post('/', auth, upload.single('image'), async (req, res) =>{
 
 router.get('/', auth, async(req, res) => {
     try{
-        const tasks = await Task.find().sort({ createdAt: -1});
+        const tasks = await Task.find({ user: req.user.id }).sort({ createdAt: -1});
         res.json(tasks);
     }
     catch(err){
+        console.error("Fetch Error:", err.message);
         res.status(500).json({message: err.message});
     }
 });
