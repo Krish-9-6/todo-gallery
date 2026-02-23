@@ -1,0 +1,13 @@
+# Ignore the environment file inside the server folder
+server/.env
+
+# Ignore all node_modules in any folder
+**/node_modules/
+
+# Ignore build/dist folders
+client/dist/
+client/build/
+
+# Misc
+.DS_Store
+*.log
